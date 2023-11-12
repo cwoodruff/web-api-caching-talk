@@ -396,3 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# End of https://www.toptal.com/developers/gitignore/api/rider,csharp,visualstudio,visualstudiocode
+.idea/
+
+.DS_Store
+.idea/.idea.NextGenASPNET7WebAPI/.idea/aws.xml
+.idea/.idea.NextGenASPNET7WebAPI/.idea/dataSources.xml
