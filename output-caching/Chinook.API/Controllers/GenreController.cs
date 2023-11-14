@@ -15,11 +15,13 @@ public class GenreController : ControllerBase
 {
     private readonly IChinookSupervisor _chinookSupervisor;
     private readonly ILogger<GenreController> _logger;
+    private readonly IOutputCacheStore _cache;
 
-    public GenreController(IChinookSupervisor chinookSupervisor, ILogger<GenreController> logger)
+    public GenreController(IChinookSupervisor chinookSupervisor, ILogger<GenreController> logger, IOutputCacheStore cache)
     {
         _chinookSupervisor = chinookSupervisor;
         _logger = logger;
+        _cache = cache;
     }
 
     [HttpGet]
@@ -133,10 +135,12 @@ public class GenreController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [OutputCache(PolicyName = "GenrePolicy")]
     public async Task<ActionResult> Delete(int id)
     {
         try
         {
+            await _cache.EvictByTagAsync("GenrePolicy_Tag", new CancellationToken());
             return Ok(await _chinookSupervisor.DeleteGenre(id));
         }
         catch (Exception ex)

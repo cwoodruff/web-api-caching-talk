@@ -82,9 +82,11 @@ public static class ServicesConfiguration
             options.AddBasePolicy(policy => policy
                 .Expire(TimeSpan.FromMinutes(3)));
             options.AddPolicy("GenrePolicy", policy => policy
-                .Expire(TimeSpan.FromDays(90)));
+                .Expire(TimeSpan.FromDays(90))
+                .Tag("GenrePolicy_Tag"));
             options.AddPolicy("MediaTypePolicy", policy => policy
-                .Expire(TimeSpan.FromDays(90)));
+                .Expire(TimeSpan.FromDays(90))
+                .Tag("MediaTypePolicy_Tag"));
         });
     }
 }

@@ -15,11 +15,13 @@ public class MediaTypeController : ControllerBase
 {
     private readonly IChinookSupervisor _chinookSupervisor;
     private readonly ILogger<MediaTypeController> _logger;
+    private readonly IOutputCacheStore _cache;
 
-    public MediaTypeController(IChinookSupervisor chinookSupervisor, ILogger<MediaTypeController> logger)
+    public MediaTypeController(IChinookSupervisor chinookSupervisor, ILogger<MediaTypeController> logger, IOutputCacheStore cache)
     {
         _chinookSupervisor = chinookSupervisor;
         _logger = logger;
+        _cache = cache;
     }
 
     [HttpGet]
@@ -135,10 +137,12 @@ public class MediaTypeController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [OutputCache(PolicyName = "MediaTypePolicy")]
     public async Task<ActionResult> Delete(int id)
     {
         try
         {
+            await _cache.EvictByTagAsync("MediaTypePolicy_Tag", new CancellationToken());
             return Ok(await _chinookSupervisor.DeleteMediaType(id));
         }
         catch (Exception ex)
