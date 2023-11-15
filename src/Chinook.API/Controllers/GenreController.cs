@@ -23,6 +23,7 @@ public class GenreController : ControllerBase
 
     [HttpGet]
     [Produces("application/json")]
+    [ResponseCache(Duration = 2592000)]
     public async Task<ActionResult<List<GenreApiModel>>> Get()
     {
         try
@@ -48,6 +49,7 @@ public class GenreController : ControllerBase
 
     [HttpGet("{id}", Name = "GetGenreById")]
     [Produces("application/json")]
+    [ResponseCache(Duration = 2592000)]
     public async Task<ActionResult<GenreApiModel>> Get(int id)
     {
         try

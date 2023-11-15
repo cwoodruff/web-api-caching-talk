@@ -23,6 +23,7 @@ public class MediaTypeController : ControllerBase
 
     [HttpGet]
     [Produces("application/json")]
+    [ResponseCache(Duration = 2592000)]
     public async Task<ActionResult<List<MediaTypeApiModel>>> Get()
     {
         try
@@ -48,6 +49,7 @@ public class MediaTypeController : ControllerBase
 
     [HttpGet("{id}", Name = "GetMediaTypeById")]
     [Produces("application/json")]
+    [ResponseCache(Duration = 2592000)]
     public async Task<ActionResult<MediaTypeApiModel>> Get(int id)
     {
         try
