@@ -22,6 +22,8 @@ app.UseCors();
 
 app.UseHttpsRedirection();
 
+app.UseOutputCache();
+
 app.UseAuthorization();
 
 app.MapControllers();

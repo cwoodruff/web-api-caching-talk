@@ -4,6 +4,7 @@ using Chinook.Domain.Supervisor;
 using FluentValidation;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Chinook.API.Controllers;
 
@@ -22,6 +23,7 @@ public class AlbumController : ControllerBase
     }
 
     [HttpGet]
+    [OutputCache]
     [Produces(typeof(List<AlbumApiModel>))]
     public async Task<ActionResult<List<AlbumApiModel>>> Get()
     {
@@ -46,6 +48,7 @@ public class AlbumController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetAlbumById")]
+    [OutputCache(PolicyName = "Expire20")]
     public async Task<ActionResult<AlbumApiModel>> Get(int id)
     {
         try  
