@@ -52,7 +52,7 @@ public class GenreController : ControllerBase
 
     [HttpGet("{id}", Name = "GetGenreById")]
     [Produces("application/json")]
-    [OutputCache(PolicyName = "GenrePolicy")]
+    [OutputCache(Tags = new[] { "GenrePolicy_Tag" })]
     public async Task<ActionResult<GenreApiModel>> Get(int id)
     {
         try

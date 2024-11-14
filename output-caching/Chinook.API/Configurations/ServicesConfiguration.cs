@@ -87,12 +87,6 @@ public static class ServicesConfiguration
             options.AddPolicy("MediaTypePolicy", policy => policy
                 .Expire(TimeSpan.FromDays(90))
                 .Tag("MediaTypePolicy_Tag"));
-        });
-        
-        services.AddOutputCache(options =>
-        {
-            options.AddBasePolicy(builder => 
-                builder.Expire(TimeSpan.FromSeconds(10)));
             options.AddPolicy("Expire20", builder => 
                 builder.Expire(TimeSpan.FromSeconds(20)));
             options.AddPolicy("Expire30", builder => 
